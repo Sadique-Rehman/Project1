@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,6 +22,53 @@
     justify-content: center;
   }
 
+  /* ── HIGHSCORE BOX top-right ── */
+  .hs-box {
+    position: fixed;
+    top: 1.6rem;
+    right: 1.8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    padding: 10px 18px;
+    border-radius: 2px;
+    background: #0e0e0e;
+    box-shadow: 0 0 0 1px #f0f0f0, 0 4px 0 0 #a0a0a0, 0 5px 14px rgba(255,255,255,0.04), inset 0 1px 0 rgba(255,255,255,0.05);
+    transition: box-shadow 0.4s ease;
+    min-width: 116px;
+    z-index: 10;
+  }
+
+  .hs-box.new {
+    animation: hsFlash 0.5s ease;
+  }
+
+  @keyframes hsFlash {
+    0%   { box-shadow: 0 0 0 1px #fff, 0 4px 0 0 #ccc, 0 0 40px rgba(255,255,255,0.25); }
+    100% { box-shadow: 0 0 0 1px #f0f0f0, 0 4px 0 0 #a0a0a0, 0 5px 14px rgba(255,255,255,0.04); }
+  }
+
+  .hs-label {
+    font-size: 8px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: #444;
+    font-weight: 400;
+  }
+
+  .hs-time {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    font-variant-numeric: tabular-nums;
+    color: #eee;
+  }
+
+  .hs-time.empty { color: #2a2a2a; }
+
+  /* ── MAIN TIMER ── */
   .wrap {
     display: flex;
     flex-direction: column;
@@ -68,73 +116,32 @@
   .btn.reset {
     background: #0c0c0c;
     color: #444;
-    box-shadow:
-      0 0 0 1px #2a2a2a,
-      0 4px 0 0 #1a1a1a,
-      0 5px 8px rgba(0,0,0,0.5);
+    box-shadow: 0 0 0 1px #2a2a2a, 0 4px 0 0 #1a1a1a, 0 5px 8px rgba(0,0,0,0.5);
   }
-  .btn.reset:hover {
-    color: #888;
-    box-shadow:
-      0 0 0 1px #3a3a3a,
-      0 4px 0 0 #1a1a1a,
-      0 5px 8px rgba(0,0,0,0.5);
-  }
-  .btn.reset:active {
-    transform: translateY(3px);
-    box-shadow:
-      0 0 0 1px #2a2a2a,
-      0 1px 0 0 #1a1a1a,
-      0 2px 4px rgba(0,0,0,0.4);
-  }
+  .btn.reset:hover { color: #888; box-shadow: 0 0 0 1px #3a3a3a, 0 4px 0 0 #1a1a1a, 0 5px 8px rgba(0,0,0,0.5); }
+  .btn.reset:active { transform: translateY(3px); box-shadow: 0 0 0 1px #2a2a2a, 0 1px 0 0 #1a1a1a, 0 2px 4px rgba(0,0,0,0.4); }
 
   .btn.primary {
     background: #161616;
     color: #d0d0d0;
-    box-shadow:
-      0 0 0 1px #383838,
-      0 4px 0 0 #0a0a0a,
-      0 5px 12px rgba(0,0,0,0.6),
-      inset 0 1px 0 rgba(255,255,255,0.04);
+    box-shadow: 0 0 0 1px #383838, 0 4px 0 0 #0a0a0a, 0 5px 12px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.04);
   }
-  .btn.primary:hover {
-    color: #fff;
-    background: #1c1c1c;
-    box-shadow:
-      0 0 0 1px #484848,
-      0 4px 0 0 #0a0a0a,
-      0 6px 16px rgba(0,0,0,0.6),
-      inset 0 1px 0 rgba(255,255,255,0.06);
-  }
-  .btn.primary:active {
-    transform: translateY(3px);
-    background: #111;
-    box-shadow:
-      0 0 0 1px #303030,
-      0 1px 0 0 #0a0a0a,
-      0 2px 6px rgba(0,0,0,0.5),
-      inset 0 1px 0 rgba(0,0,0,0.2);
-  }
+  .btn.primary:hover { color: #fff; background: #1c1c1c; box-shadow: 0 0 0 1px #484848, 0 4px 0 0 #0a0a0a, 0 6px 16px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.06); }
+  .btn.primary:active { transform: translateY(3px); background: #111; box-shadow: 0 0 0 1px #303030, 0 1px 0 0 #0a0a0a, 0 2px 6px rgba(0,0,0,0.5); }
+  .btn:active::after { content: ''; position: absolute; inset: 0; border-radius: 2px; background: rgba(255,255,255,0.03); }
 
-  .btn:active::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 2px;
-    background: rgba(255,255,255,0.03);
-  }
-
-  .dot {
-    width: 3px;
-    height: 3px;
-    border-radius: 50%;
-    background: #222;
-    margin: 0 0.3rem;
-  }
+  .dot { width: 3px; height: 3px; border-radius: 50%; background: #222; }
 </style>
 </head>
 <body>
 
+<!-- Highscore top-right -->
+<div class="hs-box" id="hsBox">
+  <span class="hs-label">best</span>
+  <span class="hs-time empty" id="hsTime">--:--:--</span>
+</div>
+
+<!-- Timer -->
 <div class="wrap">
   <div id="display" class="paused">00:00:00</div>
   <div class="controls">
@@ -145,59 +152,106 @@
 </div>
 
 <script>
-  const display = document.getElementById('display');
+  const display  = document.getElementById('display');
   const pauseBtn = document.getElementById('pauseBtn');
   const resetBtn = document.getElementById('resetBtn');
+  const hsBox    = document.getElementById('hsBox');
+  const hsTime   = document.getElementById('hsTime');
 
-  let elapsed = 0;
-  let running = false;
-  let lastTick = null;
-  let worker = null;
+  let startTime   = 0;   // absolute ms when timer last started
+  let accumulated = 0;   // ms accumulated before last pause
+  let running     = false;
+  let rafId       = null;
+  let worker      = null;
+  let highscore   = parseInt(localStorage.getItem('timer_hs') || '0', 10);
+  let brokeDuring = false;
 
-  function pad(n) { return String(Math.floor(n)).padStart(2, '0'); }
+  function pad(n) { return String(n).padStart(2, '0'); }
   function format(ms) {
     const s = Math.floor(ms / 1000);
     return pad(Math.floor(s / 3600)) + ':' + pad(Math.floor((s % 3600) / 60)) + ':' + pad(s % 60);
   }
 
-  const workerCode = `
+  function elapsed() {
+    return running ? accumulated + (performance.now() - startTime) : accumulated;
+  }
+
+  function renderHS() {
+    if (highscore === 0) { hsTime.textContent = '--:--:--'; hsTime.className = 'hs-time empty'; return; }
+    hsTime.textContent = format(highscore);
+    hsTime.className = 'hs-time';
+  }
+  renderHS();
+
+  function checkRecord(ms) {
+    if (ms > highscore) {
+      highscore = ms;
+      localStorage.setItem('timer_hs', Math.floor(ms));
+      hsTime.textContent = format(highscore);
+      hsTime.className = 'hs-time';
+      if (!brokeDuring) {
+        brokeDuring = true;
+        hsBox.classList.remove('new');
+        void hsBox.offsetWidth; // reflow to retrigger animation
+        hsBox.classList.add('new');
+        setTimeout(() => hsBox.classList.remove('new'), 600);
+      }
+    }
+  }
+
+  // Web Worker — keeps ticking when tab is hidden
+  const workerSrc = `
     let iv = null;
     self.onmessage = function(e) {
-      if (e.data === 'start') { if (!iv) iv = setInterval(() => self.postMessage('tick'), 50); }
+      if (e.data === 'start') { if (!iv) iv = setInterval(() => self.postMessage('tick'), 200); }
       else if (e.data === 'stop') { clearInterval(iv); iv = null; }
     };
   `;
-
   try {
-    const blob = new Blob([workerCode], { type: 'application/javascript' });
-    worker = new Worker(URL.createObjectURL(blob));
+    worker = new Worker(URL.createObjectURL(new Blob([workerSrc], { type: 'application/javascript' })));
     worker.onmessage = function() {
       if (!running) return;
-      const now = performance.now();
-      if (lastTick !== null) elapsed += now - lastTick;
-      lastTick = now;
-      display.textContent = format(elapsed);
+      const ms = elapsed();
+      display.textContent = format(ms);
+      checkRecord(ms);
     };
-  } catch(e) {}
+  } catch(e) { worker = null; }
 
-  pauseBtn.addEventListener('click', function() {
-    running = !running;
-    if (running) {
+  // rAF for smooth updates when tab is visible
+  function tick() {
+    if (!running) return;
+    const ms = elapsed();
+    display.textContent = format(ms);
+    checkRecord(ms);
+    rafId = requestAnimationFrame(tick);
+  }
+
+  pauseBtn.addEventListener('click', () => {
+    if (!running) {
+      // START / RESUME
+      running = true;
+      startTime = performance.now();
       display.className = 'running';
       pauseBtn.textContent = 'Pause';
-      lastTick = performance.now();
       if (worker) worker.postMessage('start');
+      rafId = requestAnimationFrame(tick);
     } else {
+      // PAUSE
+      accumulated += performance.now() - startTime;
+      running = false;
+      cancelAnimationFrame(rafId);
+      if (worker) worker.postMessage('stop');
       display.className = 'paused';
       pauseBtn.textContent = 'Resume';
-      if (worker) worker.postMessage('stop');
     }
   });
 
-  resetBtn.addEventListener('click', function() {
+  resetBtn.addEventListener('click', () => {
     running = false;
-    elapsed = 0;
-    lastTick = null;
+    accumulated = 0;
+    startTime = 0;
+    brokeDuring = false;
+    cancelAnimationFrame(rafId);
     if (worker) worker.postMessage('stop');
     display.textContent = '00:00:00';
     display.className = 'paused';
