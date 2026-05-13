@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Timer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    height: 100%;
+    background: #0c0c0c;
+    font-family: 'JetBrains Mono', monospace;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3.5rem;
+  }
+
+  #display {
+    font-size: clamp(72px, 15vw, 152px);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: #f2f2f2;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+    user-select: none;
+    transition: color 0.35s ease;
+  }
+
+  #display.paused { color: #2e2e2e; }
+  #display.running { color: #f2f2f2; }
+
+  .controls {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+  }
+
+  .btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    padding: 10px 22px;
+    border-radius: 2px;
+    position: relative;
+    transition: all 0.07s ease;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  .btn.reset {
+    background: #0c0c0c;
+    color: #444;
+    box-shadow:
+      0 0 0 1px #2a2a2a,
+      0 4px 0 0 #1a1a1a,
+      0 5px 8px rgba(0,0,0,0.5);
+  }
+  .btn.reset:hover {
+    color: #888;
+    box-shadow:
+      0 0 0 1px #3a3a3a,
+      0 4px 0 0 #1a1a1a,
+      0 5px 8px rgba(0,0,0,0.5);
+  }
+  .btn.reset:active {
+    transform: translateY(3px);
+    box-shadow:
+      0 0 0 1px #2a2a2a,
+      0 1px 0 0 #1a1a1a,
+      0 2px 4px rgba(0,0,0,0.4);
+  }
+
+  .btn.primary {
+    background: #161616;
+    color: #d0d0d0;
+    box-shadow:
+      0 0 0 1px #383838,
+      0 4px 0 0 #0a0a0a,
+      0 5px 12px rgba(0,0,0,0.6),
+      inset 0 1px 0 rgba(255,255,255,0.04);
+  }
+  .btn.primary:hover {
+    color: #fff;
+    background: #1c1c1c;
+    box-shadow:
+      0 0 0 1px #484848,
+      0 4px 0 0 #0a0a0a,
+      0 6px 16px rgba(0,0,0,0.6),
+      inset 0 1px 0 rgba(255,255,255,0.06);
+  }
+  .btn.primary:active {
+    transform: translateY(3px);
+    background: #111;
+    box-shadow:
+      0 0 0 1px #303030,
+      0 1px 0 0 #0a0a0a,
+      0 2px 6px rgba(0,0,0,0.5),
+      inset 0 1px 0 rgba(0,0,0,0.2);
+  }
+
+  .btn:active::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 2px;
+    background: rgba(255,255,255,0.03);
+  }
+
+  .dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: #222;
+    margin: 0 0.3rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div id="display" class="paused">00:00:00</div>
+  <div class="controls">
+    <button class="btn reset" id="resetBtn">Reset</button>
+    <div class="dot"></div>
+    <button class="btn primary" id="pauseBtn">Start</button>
+  </div>
+</div>
+
+<script>
+  const display = document.getElementById('display');
+  const pauseBtn = document.getElementById('pauseBtn');
+  const resetBtn = document.getElementById('resetBtn');
+
+  let elapsed = 0;
+  let running = false;
+  let lastTick = null;
+  let worker = null;
+
+  function pad(n) { return String(Math.floor(n)).padStart(2, '0'); }
+  function format(ms) {
+    const s = Math.floor(ms / 1000);
+    return pad(Math.floor(s / 3600)) + ':' + pad(Math.floor((s % 3600) / 60)) + ':' + pad(s % 60);
+  }
+
+  const workerCode = `
+    let iv = null;
+    self.onmessage = function(e) {
+      if (e.data === 'start') { if (!iv) iv = setInterval(() => self.postMessage('tick'), 50); }
+      else if (e.data === 'stop') { clearInterval(iv); iv = null; }
+    };
+  `;
+
+  try {
+    const blob = new Blob([workerCode], { type: 'application/javascript' });
+    worker = new Worker(URL.createObjectURL(blob));
+    worker.onmessage = function() {
+      if (!running) return;
+      const now = performance.now();
+      if (lastTick !== null) elapsed += now - lastTick;
+      lastTick = now;
+      display.textContent = format(elapsed);
+    };
+  } catch(e) {}
+
+  pauseBtn.addEventListener('click', function() {
+    running = !running;
+    if (running) {
+      display.className = 'running';
+      pauseBtn.textContent = 'Pause';
+      lastTick = performance.now();
+      if (worker) worker.postMessage('start');
+    } else {
+      display.className = 'paused';
+      pauseBtn.textContent = 'Resume';
+      if (worker) worker.postMessage('stop');
+    }
+  });
+
+  resetBtn.addEventListener('click', function() {
+    running = false;
+    elapsed = 0;
+    lastTick = null;
+    if (worker) worker.postMessage('stop');
+    display.textContent = '00:00:00';
+    display.className = 'paused';
+    pauseBtn.textContent = 'Start';
+  });
+</script>
+</body>
+</html>
