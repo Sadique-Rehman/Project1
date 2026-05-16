@@ -43,6 +43,7 @@ html, body {
 .rank-btn:active { transform: translateY(3px); box-shadow: 0 0 0 1px #f0f0f0, 0 1px 0 0 #a0a0a0; }
 .rank-btn-label { font-size: 8px; letter-spacing: 0.4em; text-transform: uppercase; color: #444; font-weight: 400; }
 .rank-btn-name  { font-size: 11px; font-weight: 500; color: #eee; letter-spacing: 0.05em; white-space: nowrap; }
+.rank-btn-logo { width: 26px; height: 26px; object-fit: contain; display: block; margin-top: 2px; }
 
 /* ─── TOP-RIGHT HS BOX ──────────────────────────────────── */
 .hs-box {
@@ -279,6 +280,7 @@ html, body {
 <button class="rank-btn" id="rankBtn">
   <span class="rank-btn-label">rank</span>
   <span class="rank-btn-name" id="rankBtnName">—</span>
+  <img class="rank-btn-logo" id="rankBtnLogo" src="silver1.png" alt="Current rank logo">
 </button>
 
 <!-- HS box top-right -->
@@ -309,7 +311,7 @@ html, body {
     </div>
     <div class="rank-hero">
       <div class="rank-hero-img">
-        <img class="rank-hero-image" src="Wander1.webp" alt="Wanderer 1">
+        <img class="rank-hero-image" src="silver1.png" alt="Wanderer 1">
       </div>
       <div class="rank-hero-info">
         <div class="rank-hero-label">current rank</div>
@@ -371,6 +373,24 @@ const RANKS = [
   { name: 'Eternal I',      pts: 170 },
   { name: 'Eternal II',     pts: 210 },
   { name: 'THE ETERNAL ONE',pts: 250 },
+];
+
+const RANK_LOGOS = [
+  'silver1.png',   // Wanderer I
+  'silver3.png',   // Wanderer II
+  'platinum1.png', // Seeker I
+  'platinum3.png', // Seeker II
+  'diamond1.png',  // Shadow I
+  'diamond3.png',  // Shadow II
+  'ascendant1.png',// Phantom I
+  'ascendant3.png',// Phantom II
+  'immortal1.png', // Reaper I
+  'immortal3.png', // Reaper II
+  'radiant.png',   // Abyss Walker I
+  'radiant.png',   // Abyss Walker II
+  'radiant.png',   // Eternal I
+  'radiant.png',   // Eternal II
+  'radiant.png',   // THE ETERNAL ONE
 ];
 
 function getRankIndex(pts) {
@@ -459,6 +479,8 @@ function checkHS(ms) {
    RANK UI
 ══════════════════════════════════════════ */
 const rankBtnName   = document.getElementById('rankBtnName');
+const rankBtnLogo   = document.getElementById('rankBtnLogo');
+const heroImage     = document.querySelector('.rank-hero-image');
 const heroName      = document.getElementById('heroName');
 const heroPts       = document.getElementById('heroPts');
 const heroHrs       = document.getElementById('heroHrs');
@@ -484,6 +506,10 @@ function updateRankUI(pts) {
   const isEternal = idx === RANKS.length - 1;
 
   rankBtnName.textContent = rank.name;
+  rankBtnLogo.src         = RANK_LOGOS[idx];
+  rankBtnLogo.alt         = rank.name + ' logo';
+  heroImage.src           = RANK_LOGOS[idx];
+  heroImage.alt           = rank.name;
   heroName.textContent    = rank.name;
   heroPts.textContent     = pts.toFixed(2);
   heroHrs.textContent     = pts.toFixed(1) + 'h';
@@ -529,7 +555,8 @@ function buildRankList(currentIdx, pts) {
     imgWrap.className = 'rank-item-img' + (isLocked ? ' locked' : '');
     const img = document.createElement('img');
     img.className = 'rank-item-image';
-    img.src = ''; img.alt = '';
+    img.src = RANK_LOGOS[i] || '';
+    img.alt = r.name + ' logo';
     imgWrap.appendChild(img);
 
     const info = document.createElement('div');
@@ -599,7 +626,7 @@ try {
     checkHS(sesMs);
     const pts    = msToPoints(liveTotal);
     const newIdx = getRankIndex(pts);
-    if (newIdx > prevRankIdx) { prevRankIdx = newIdx; showRankUp(RANKS[newIdx].name); rankBtnName.textContent = RANKS[newIdx].name; }
+    if (newIdx > prevRankIdx) { prevRankIdx = newIdx; showRankUp(RANKS[newIdx].name); rankBtnName.textContent = RANKS[newIdx].name; rankBtnLogo.src = RANK_LOGOS[newIdx]; rankBtnLogo.alt = RANKS[newIdx].name + ' logo'; }
     if (modalOverlay.classList.contains('open')) updateRankUI(pts);
   };
 } catch(e) {}
@@ -650,7 +677,12 @@ resetBtn.addEventListener('click', () => {
   display.textContent = '00:00:00';
   display.className = 'paused';
   pauseBtn.textContent = 'Start';
-  rankBtnName.textContent = RANKS[getRankIndex(msToPoints(totalStudiedMs))].name;
+  {
+    const idx = getRankIndex(msToPoints(totalStudiedMs));
+    rankBtnName.textContent = RANKS[idx].name;
+    rankBtnLogo.src = RANK_LOGOS[idx];
+    rankBtnLogo.alt = RANKS[idx].name + ' logo';
+  }
 });
 
 /* ══════════════════════════════════════════
@@ -683,7 +715,12 @@ logoutBtn.addEventListener('click', function() {
    INIT
 ══════════════════════════════════════════ */
 (function init() {
-  rankBtnName.textContent = RANKS[getRankIndex(msToPoints(totalStudiedMs))].name;
+  {
+    const idx = getRankIndex(msToPoints(totalStudiedMs));
+    rankBtnName.textContent = RANKS[idx].name;
+    rankBtnLogo.src = RANK_LOGOS[idx];
+    rankBtnLogo.alt = RANKS[idx].name + ' logo';
+  }
   prevRankIdx = getRankIndex(msToPoints(totalStudiedMs));
   renderHS();
 })();
