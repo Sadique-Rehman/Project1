@@ -113,7 +113,6 @@ html, body {
   transition: opacity 0.3s ease;
 }
 .modal-overlay.open { opacity: 1; pointer-events: all; }
-
 .modal {
   width: min(560px, 94vw);
   max-height: 88vh;
@@ -127,8 +126,6 @@ html, body {
   overflow: hidden;
 }
 .modal-overlay.open .modal { transform: translateY(0) scale(1); }
-
-/* modal header */
 .modal-header {
   padding: 1.4rem 1.6rem 1.2rem;
   border-bottom: 1px solid #191919;
@@ -142,8 +139,6 @@ html, body {
   padding: 0 2px; transition: color 0.2s; font-family: inherit;
 }
 .modal-close:hover { color: #888; }
-
-/* current rank hero */
 .rank-hero {
   padding: 1.4rem 1.6rem;
   border-bottom: 1px solid #141414;
@@ -151,12 +146,9 @@ html, body {
   flex-shrink: 0;
 }
 .rank-hero-img {
-  width: 56px; height: 56px;
-  border-radius: 3px;
-  background: #161616;
-  border: 1px solid #252525;
-  flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center;
+  width: 56px; height: 56px; border-radius: 3px;
+  background: #161616; border: 1px solid #252525;
+  flex-shrink: 0; display: flex; align-items: center; justify-content: center;
   overflow: hidden;
 }
 .rank-hero-img img { width: 100%; height: 100%; object-fit: cover; }
@@ -165,15 +157,11 @@ html, body {
 .rank-hero-name  { font-size: 22px; font-weight: 600; letter-spacing: -0.01em; color: #f0f0f0; margin-bottom: 6px; line-height: 1; }
 .rank-hero-pts   { font-size: 11px; color: #444; letter-spacing: 0.1em; }
 .rank-hero-pts span { color: #999; }
-
-/* progress bar */
 .progress-wrap { padding: 1.2rem 1.6rem; border-bottom: 1px solid #141414; flex-shrink: 0; }
 .progress-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
 .progress-next  { font-size: 9px; letter-spacing: 0.35em; text-transform: uppercase; color: #333; }
 .progress-pct   { font-size: 11px; font-weight: 500; color: #7c3aed; }
-.progress-track {
-  height: 3px; background: #1a1a1a; border-radius: 2px; overflow: hidden; position: relative;
-}
+.progress-track { height: 3px; background: #1a1a1a; border-radius: 2px; overflow: hidden; }
 .progress-fill {
   height: 100%; width: 0%;
   background: linear-gradient(90deg, #4c1d95, #7c3aed, #a78bfa);
@@ -182,13 +170,10 @@ html, body {
   box-shadow: 0 0 8px rgba(124,58,237,0.5);
 }
 .progress-label { margin-top: 6px; font-size: 9px; color: #2e2e2e; letter-spacing: 0.2em; }
-
-/* rank list */
 .rank-list-wrap { overflow-y: auto; flex: 1; padding: 0.8rem 0; }
 .rank-list-wrap::-webkit-scrollbar { width: 4px; }
 .rank-list-wrap::-webkit-scrollbar-track { background: transparent; }
 .rank-list-wrap::-webkit-scrollbar-thumb { background: #1e1e1e; border-radius: 2px; }
-
 .rank-item {
   display: flex; align-items: center; gap: 1rem;
   padding: 0.75rem 1.6rem;
@@ -201,37 +186,27 @@ html, body {
   content: ''; position: absolute; left: 0; top: 0; bottom: 0;
   width: 2px; background: linear-gradient(180deg, #4c1d95, #7c3aed);
 }
-
 .rank-item-img {
   width: 36px; height: 36px; border-radius: 2px;
   background: #161616; border: 1px solid #202020;
   flex-shrink: 0; display: flex; align-items: center; justify-content: center;
-  overflow: hidden; position: relative;
+  overflow: hidden;
 }
 .rank-item-img img { width: 100%; height: 100%; object-fit: cover; }
 .rank-item-img.locked { opacity: 0.3; filter: grayscale(1); }
-
 .rank-item-info { flex: 1; }
-.rank-item-name {
-  font-size: 12px; font-weight: 500; color: #d0d0d0;
-  letter-spacing: 0.03em; margin-bottom: 2px;
-}
+.rank-item-name { font-size: 12px; font-weight: 500; color: #d0d0d0; letter-spacing: 0.03em; margin-bottom: 2px; }
 .rank-item-name.locked { color: #333; }
 .rank-item-pts  { font-size: 9px; color: #333; letter-spacing: 0.2em; }
-
 .rank-item-status { font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; }
 .rank-item-status.unlocked { color: #4a4a4a; }
 .rank-item-status.current  { color: #7c3aed; }
 .rank-item-status.locked   { color: #222; }
-
-/* current badge */
 .current-badge {
   font-size: 8px; letter-spacing: 0.3em; text-transform: uppercase;
   color: #7c3aed; border: 1px solid #2e1a6e; padding: 2px 7px;
   border-radius: 1px; background: #0d0a1f;
 }
-
-/* eternal glow */
 .rank-item.eternal .rank-item-name { color: #f59e0b; }
 .rank-item.eternal .rank-item-img  { border-color: #44260a; box-shadow: 0 0 12px rgba(245,158,11,0.15); }
 .rank-item.eternal.current::before { background: linear-gradient(180deg, #92400e, #f59e0b); }
@@ -241,8 +216,6 @@ html, body {
   box-shadow: 0 0 8px rgba(245,158,11,0.5);
 }
 .progress-pct.eternal { color: #f59e0b; }
-
-/* rank-up toast */
 .rankup-toast {
   position: fixed; bottom: 2.5rem; left: 50%; transform: translateX(-50%) translateY(20px);
   background: #0d0a1f; border: 1px solid #2e1a6e;
@@ -255,6 +228,49 @@ html, body {
   white-space: nowrap;
 }
 .rankup-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ─── SETTINGS ───────────────────────────────────────────── */
+.settings-btn {
+  position: fixed;
+  bottom: 1.8rem; left: 1.8rem;
+  width: 36px; height: 36px;
+  background: #0e0e0e;
+  border: 1px solid #1e1e1e;
+  border-radius: 3px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: #2e2e2e; z-index: 50;
+  transition: color 0.2s, border-color 0.2s;
+  box-shadow: 0 4px 0 #0a0a0a;
+}
+.settings-btn:hover  { color: #777; border-color: #333; }
+.settings-btn:active { transform: translateY(3px); box-shadow: 0 1px 0 #0a0a0a; }
+
+.settings-popup {
+  position: fixed;
+  bottom: 5.2rem; left: 1.8rem;
+  background: #0e0e0e;
+  border: 1px solid #222;
+  border-radius: 3px;
+  padding: 4px;
+  z-index: 51;
+  opacity: 0; pointer-events: none;
+  transform: translateY(6px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.7);
+}
+.settings-popup.open { opacity: 1; pointer-events: all; transform: translateY(0); }
+
+.logout-btn {
+  display: flex; align-items: center; gap: 8px;
+  background: none; border: none; cursor: pointer;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; font-weight: 400;
+  letter-spacing: 0.3em; text-transform: uppercase;
+  color: #444; padding: 9px 14px; border-radius: 2px;
+  width: 100%; white-space: nowrap;
+  transition: color 0.15s, background 0.15s;
+}
+.logout-btn:hover { color: #ccc; background: #141414; }
 </style>
 </head>
 <body>
@@ -291,8 +307,6 @@ html, body {
       <span class="modal-title">Ranking</span>
       <button class="modal-close" id="modalClose">✕</button>
     </div>
-
-    <!-- Current rank hero -->
     <div class="rank-hero">
       <div class="rank-hero-img">
         <img class="rank-hero-image" src="Wander1.webp" alt="Wanderer 1">
@@ -303,8 +317,6 @@ html, body {
         <div class="rank-hero-pts"><span id="heroPts">0</span> pts · <span id="heroHrs">0h</span> studied</div>
       </div>
     </div>
-
-    <!-- Progress to next rank -->
     <div class="progress-wrap">
       <div class="progress-meta">
         <span class="progress-next" id="progressNext">next rank</span>
@@ -315,10 +327,28 @@ html, body {
       </div>
       <div class="progress-label" id="progressLabel">—</div>
     </div>
-
-    <!-- All ranks list -->
     <div class="rank-list-wrap" id="rankList"></div>
   </div>
+</div>
+
+<!-- Settings button bottom-left -->
+<button class="settings-btn" id="settingsBtn" aria-label="Settings">
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="3"/>
+    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+  </svg>
+</button>
+
+<!-- Settings popup -->
+<div class="settings-popup" id="settingsPopup">
+  <button class="logout-btn" id="logoutBtn">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+      <polyline points="16 17 21 12 16 7"/>
+      <line x1="21" y1="12" x2="9" y2="12"/>
+    </svg>
+    Logout
+  </button>
 </div>
 
 <script>
@@ -346,15 +376,14 @@ const RANKS = [
 function getRankIndex(pts) {
   let idx = 0;
   for (let i = 0; i < RANKS.length; i++) {
-    if (pts >= RANKS[i].pts) idx = i;
-    else break;
+    if (pts >= RANKS[i].pts) idx = i; else break;
   }
   return idx;
 }
 
 function getRankProgress(pts) {
-  const idx = getRankIndex(pts);
-  const cur = RANKS[idx];
+  const idx  = getRankIndex(pts);
+  const cur  = RANKS[idx];
   const next = RANKS[idx + 1];
   if (!next) return { pct: 100, label: 'MAX', nextName: null };
   const pct = ((pts - cur.pts) / (next.pts - cur.pts)) * 100;
@@ -368,26 +397,25 @@ function getRankProgress(pts) {
 /* ══════════════════════════════════════════
    STORAGE
 ══════════════════════════════════════════ */
-const LS_TOTAL  = 'timer_total_ms';
-const LS_HS     = 'timer_hs';
-
-function saveTotal(ms)  { localStorage.setItem(LS_TOTAL, Math.floor(ms)); }
-function loadTotal()    { return parseInt(localStorage.getItem(LS_TOTAL) || '0', 10); }
-function saveHS(ms)     { localStorage.setItem(LS_HS, Math.floor(ms)); }
-function loadHS()       { return parseInt(localStorage.getItem(LS_HS) || '0', 10); }
+const LS_TOTAL = 'timer_total_ms';
+const LS_HS    = 'timer_hs';
+function saveTotal(ms) { localStorage.setItem(LS_TOTAL, Math.floor(ms)); }
+function loadTotal()   { return parseInt(localStorage.getItem(LS_TOTAL) || '0', 10); }
+function saveHS(ms)    { localStorage.setItem(LS_HS, Math.floor(ms)); }
+function loadHS()      { return parseInt(localStorage.getItem(LS_HS) || '0', 10); }
 
 /* ══════════════════════════════════════════
    TIMER STATE
 ══════════════════════════════════════════ */
-let totalStudiedMs  = loadTotal();   // permanent accumulation
-let sessionMs       = 0;             // current session
-let startTime       = 0;
-let running         = false;
-let rafId           = null;
-let worker          = null;
-let highscore       = loadHS();
-let brokeDuring     = false;
-let prevRankIdx     = getRankIndex(totalStudiedMs / 3600000);
+let totalStudiedMs = loadTotal();
+let sessionMs      = 0;
+let startTime      = 0;
+let running        = false;
+let rafId          = null;
+let worker         = null;
+let highscore      = loadHS();
+let brokeDuring    = false;
+let prevRankIdx    = getRankIndex(totalStudiedMs / 3600000);
 
 /* ══════════════════════════════════════════
    HELPERS
@@ -397,11 +425,7 @@ function formatTime(ms) {
   const s = Math.floor(ms / 1000);
   return pad(Math.floor(s/3600)) + ':' + pad(Math.floor((s%3600)/60)) + ':' + pad(s%60);
 }
-function msToPoints(ms) { return ms / 3600000; }   // 1 hr = 1 pt
-
-function currentElapsed() {
-  return running ? sessionMs + (performance.now() - startTime) : sessionMs;
-}
+function msToPoints(ms) { return ms / 3600000; }
 
 /* ══════════════════════════════════════════
    HS
@@ -434,17 +458,17 @@ function checkHS(ms) {
 /* ══════════════════════════════════════════
    RANK UI
 ══════════════════════════════════════════ */
-const rankBtnName  = document.getElementById('rankBtnName');
-const heroName     = document.getElementById('heroName');
-const heroPts      = document.getElementById('heroPts');
-const heroHrs      = document.getElementById('heroHrs');
-const progressNext = document.getElementById('progressNext');
-const progressPct  = document.getElementById('progressPct');
-const progressFill = document.getElementById('progressFill');
-const progressLabel= document.getElementById('progressLabel');
-const rankList     = document.getElementById('rankList');
-const rankupToast  = document.getElementById('rankupToast');
-let toastTimer     = null;
+const rankBtnName   = document.getElementById('rankBtnName');
+const heroName      = document.getElementById('heroName');
+const heroPts       = document.getElementById('heroPts');
+const heroHrs       = document.getElementById('heroHrs');
+const progressNext  = document.getElementById('progressNext');
+const progressPct   = document.getElementById('progressPct');
+const progressFill  = document.getElementById('progressFill');
+const progressLabel = document.getElementById('progressLabel');
+const rankList      = document.getElementById('rankList');
+const rankupToast   = document.getElementById('rankupToast');
+let toastTimer      = null;
 
 function showRankUp(name) {
   rankupToast.textContent = `rank up → ${name}`;
@@ -454,20 +478,16 @@ function showRankUp(name) {
 }
 
 function updateRankUI(pts) {
-  const idx   = getRankIndex(pts);
-  const rank  = RANKS[idx];
-  const prog  = getRankProgress(pts);
+  const idx      = getRankIndex(pts);
+  const rank     = RANKS[idx];
+  const prog     = getRankProgress(pts);
   const isEternal = idx === RANKS.length - 1;
 
-  // button
   rankBtnName.textContent = rank.name;
+  heroName.textContent    = rank.name;
+  heroPts.textContent     = pts.toFixed(2);
+  heroHrs.textContent     = pts.toFixed(1) + 'h';
 
-  // hero
-  heroName.textContent = rank.name;
-  heroPts.textContent  = pts.toFixed(2);
-  heroHrs.textContent  = pts.toFixed(1) + 'h';
-
-  // progress
   if (prog.nextName) {
     progressNext.textContent  = 'next → ' + prog.nextName;
     progressLabel.textContent = prog.label;
@@ -486,10 +506,8 @@ function updateRankUI(pts) {
     progressPct.classList.remove('eternal');
   }
 
-  // rank list
   buildRankList(idx, pts);
 
-  // rank-up check
   if (idx > prevRankIdx) {
     showRankUp(rank.name);
     prevRankIdx = idx;
@@ -505,9 +523,7 @@ function buildRankList(currentIdx, pts) {
     const isEternal  = i === RANKS.length - 1;
 
     const item = document.createElement('div');
-    item.className = 'rank-item'
-      + (isCurrent  ? ' current'  : '')
-      + (isEternal  ? ' eternal'  : '');
+    item.className = 'rank-item' + (isCurrent ? ' current' : '') + (isEternal ? ' eternal' : '');
 
     const imgWrap = document.createElement('div');
     imgWrap.className = 'rank-item-img' + (isLocked ? ' locked' : '');
@@ -525,15 +541,13 @@ function buildRankList(currentIdx, pts) {
 
     const ptsEl = document.createElement('div');
     ptsEl.className = 'rank-item-pts';
-    const nextPts = RANKS[i+1] ? RANKS[i+1].pts : '∞';
-    ptsEl.textContent = r.pts + ' pts' + (RANKS[i+1] ? ' → ' + nextPts : '+');
+    ptsEl.textContent = r.pts + ' pts' + (RANKS[i+1] ? ' → ' + RANKS[i+1].pts : '+');
 
     info.appendChild(name);
     info.appendChild(ptsEl);
 
     const status = document.createElement('div');
-    status.className = 'rank-item-status '
-      + (isCurrent ? 'current' : isUnlocked ? 'unlocked' : 'locked');
+    status.className = 'rank-item-status ' + (isCurrent ? 'current' : isUnlocked ? 'unlocked' : 'locked');
 
     if (isCurrent) {
       const badge = document.createElement('span');
@@ -549,9 +563,7 @@ function buildRankList(currentIdx, pts) {
     item.appendChild(status);
     rankList.appendChild(item);
 
-    if (isCurrent) {
-      setTimeout(() => item.scrollIntoView({ block: 'nearest', behavior: 'smooth' }), 100);
-    }
+    if (isCurrent) setTimeout(() => item.scrollIntoView({ block: 'nearest', behavior: 'smooth' }), 100);
   });
 }
 
@@ -563,8 +575,7 @@ const rankBtn      = document.getElementById('rankBtn');
 const modalClose   = document.getElementById('modalClose');
 
 rankBtn.addEventListener('click', () => {
-  const pts = msToPoints(totalStudiedMs);
-  updateRankUI(pts);
+  updateRankUI(msToPoints(totalStudiedMs));
   modalOverlay.classList.add('open');
 });
 modalClose.addEventListener('click', () => modalOverlay.classList.remove('open'));
@@ -577,50 +588,31 @@ const display  = document.getElementById('display');
 const pauseBtn = document.getElementById('pauseBtn');
 const resetBtn = document.getElementById('resetBtn');
 
-// Web Worker — keeps alive when tab hidden
 const workerSrc = `let iv=null;self.onmessage=function(e){if(e.data==='start'){if(!iv)iv=setInterval(()=>self.postMessage('tick'),500);}else if(e.data==='stop'){clearInterval(iv);iv=null;}};`;
 try {
   worker = new Worker(URL.createObjectURL(new Blob([workerSrc], { type: 'application/javascript' })));
-  worker.onmessage = () => onTick();
+  worker.onmessage = () => {
+    if (!running) return;
+    const sesMs     = sessionMs + (performance.now() - startTime);
+    const liveTotal = totalStudiedMs + (performance.now() - startTime);
+    display.textContent = formatTime(sesMs);
+    checkHS(sesMs);
+    const pts    = msToPoints(liveTotal);
+    const newIdx = getRankIndex(pts);
+    if (newIdx > prevRankIdx) { prevRankIdx = newIdx; showRankUp(RANKS[newIdx].name); rankBtnName.textContent = RANKS[newIdx].name; }
+    if (modalOverlay.classList.contains('open')) updateRankUI(pts);
+  };
 } catch(e) {}
-
-function onTick() {
-  if (!running) return;
-  const sesMs   = sessionMs + (performance.now() - startTime);
-  const totalMs = totalStudiedMs + sesMs - sessionMs;  // we add delta
-  // display current session on main clock
-  display.textContent = formatTime(sesMs);
-  checkHS(sesMs);
-  // update rank based on total permanent study time
-  const liveTotalMs = totalStudiedMs + (sesMs - sessionMs);
-  // simpler: track total = saved + current session progress
-  const liveTotal = totalStudiedMs + (performance.now() - startTime);
-  const pts = msToPoints(liveTotal);
-  // silent rank check (no modal rebuild unless open)
-  const newIdx = getRankIndex(pts);
-  if (newIdx > prevRankIdx) {
-    prevRankIdx = newIdx;
-    showRankUp(RANKS[newIdx].name);
-    rankBtnName.textContent = RANKS[newIdx].name;
-  }
-  if (modalOverlay.classList.contains('open')) {
-    updateRankUI(pts);
-  }
-}
 
 function rafTick() {
   if (!running) return;
-  const sesMs = sessionMs + (performance.now() - startTime);
+  const sesMs     = sessionMs + (performance.now() - startTime);
+  const liveTotal = totalStudiedMs + (performance.now() - startTime);
   display.textContent = formatTime(sesMs);
   checkHS(sesMs);
-  const liveTotal = totalStudiedMs + (performance.now() - startTime);
-  const pts = msToPoints(liveTotal);
+  const pts    = msToPoints(liveTotal);
   const newIdx = getRankIndex(pts);
-  if (newIdx > prevRankIdx) {
-    prevRankIdx = newIdx;
-    showRankUp(RANKS[newIdx].name);
-    rankBtnName.textContent = RANKS[newIdx].name;
-  }
+  if (newIdx > prevRankIdx) { prevRankIdx = newIdx; showRankUp(RANKS[newIdx].name); rankBtnName.textContent = RANKS[newIdx].name; }
   if (modalOverlay.classList.contains('open')) updateRankUI(pts);
   rafId = requestAnimationFrame(rafTick);
 }
@@ -635,7 +627,7 @@ pauseBtn.addEventListener('click', () => {
     rafId = requestAnimationFrame(rafTick);
   } else {
     const delta = performance.now() - startTime;
-    sessionMs    += delta;
+    sessionMs      += delta;
     totalStudiedMs += delta;
     saveTotal(totalStudiedMs);
     running = false;
@@ -648,32 +640,51 @@ pauseBtn.addEventListener('click', () => {
 
 resetBtn.addEventListener('click', () => {
   if (running) {
-    // save current session before reset
     const delta = performance.now() - startTime;
     totalStudiedMs += delta;
     saveTotal(totalStudiedMs);
   }
-  running = false;
-  sessionMs = 0;
-  startTime = 0;
-  brokeDuring = false;
+  running = false; sessionMs = 0; startTime = 0; brokeDuring = false;
   cancelAnimationFrame(rafId);
   if (worker) worker.postMessage('stop');
   display.textContent = '00:00:00';
   display.className = 'paused';
   pauseBtn.textContent = 'Start';
-  // update rank btn after save
-  const pts = msToPoints(totalStudiedMs);
-  rankBtnName.textContent = RANKS[getRankIndex(pts)].name;
+  rankBtnName.textContent = RANKS[getRankIndex(msToPoints(totalStudiedMs))].name;
+});
+
+/* ══════════════════════════════════════════
+   SETTINGS / LOGOUT
+══════════════════════════════════════════ */
+const settingsBtn   = document.getElementById('settingsBtn');
+const settingsPopup = document.getElementById('settingsPopup');
+const logoutBtn     = document.getElementById('logoutBtn');
+
+settingsBtn.addEventListener('click', function(e) {
+  e.stopPropagation();
+  settingsPopup.classList.toggle('open');
+});
+
+document.addEventListener('click', function(e) {
+  if (!settingsPopup.contains(e.target) && e.target !== settingsBtn) {
+    settingsPopup.classList.remove('open');
+  }
+});
+
+logoutBtn.addEventListener('click', function() {
+  /* ── Firebase logout (uncomment when Firebase is added) ──
+  import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+  signOut(getAuth()).then(() => { window.location.href = 'login.html'; });
+  ── Without Firebase: just redirect ── */
+  window.location.href = 'index.html';
 });
 
 /* ══════════════════════════════════════════
    INIT
 ══════════════════════════════════════════ */
 (function init() {
-  const pts = msToPoints(totalStudiedMs);
-  rankBtnName.textContent = RANKS[getRankIndex(pts)].name;
-  prevRankIdx = getRankIndex(pts);
+  rankBtnName.textContent = RANKS[getRankIndex(msToPoints(totalStudiedMs))].name;
+  prevRankIdx = getRankIndex(msToPoints(totalStudiedMs));
   renderHS();
 })();
 </script>
